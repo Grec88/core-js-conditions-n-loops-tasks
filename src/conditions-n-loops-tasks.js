@@ -360,6 +360,63 @@ function getBalanceIndex(arr) {
  *        ]
  */
 function getSpiralMatrix(/* size */) {
+  // const createMatrix = () => {
+  //   const matrix = [];
+  //   for (let i = 0; i < size; i += 1) {
+  //     matrix[i] = [];
+  //     for (let j = 0; j < size; j += 1) {
+  //       matrix[i][j] = 0;
+  //     }
+  //   }
+  //   return matrix;
+  // };
+
+  // const matrix = createMatrix();
+
+  // const directionalAddValToMatrix = (dir, startIdx, endIdx) => {
+  //   for (let i = startIdx; i <= endIdx; i += 1) {
+  //     if(dir === 'column'){
+  //     matrix[top][i] = current;
+  //     } else {
+  //       matrix[i][left] = current;
+  //     }
+  //     current += 1;
+  //   }
+  // }
+
+  // let top = 0;
+  // let bottom = size - 1;
+  // let left = 0;
+  // let right = size - 1;
+  // let current = 1;
+
+  // while (current <= size * size) {
+  //   for (let i = left; i <= right; i += 1) {
+  //     matrix[top][i] = current;
+  //     current += 1;
+  //   }
+  //   top += 1;
+
+  //   for (let i = top; i <= bottom; i += 1) {
+  //     matrix[i][right] = current;
+  //     current += 1;
+  //   }
+  //   right -= 1;
+
+  //   for (let i = right; i >= left; i -= 1) {
+  //     matrix[bottom][i] = current;
+  //     current += 1;
+  //   }
+  //   bottom -= 1;
+
+  //   for (let i = bottom; i >= top; i -= 1) {
+  //     matrix[i][left] = current;
+  //     current += 1;
+  //   }
+  //   left += 1;
+  // }
+
+  // return matrix;
   throw new Error('Not implemented');
 }
 
@@ -378,8 +435,24 @@ function getSpiralMatrix(/* size */) {
  *    [7, 8, 9]         [9, 6, 3]
  *  ]                 ]
  */
-function rotateMatrix(/* matrix */) {
-  throw new Error('Not implemented');
+function rotateMatrix(matrix) {
+  const resMatrix = matrix;
+  const tempMatrix = [];
+  const size = matrix.length;
+
+  for (let i = 0; i < size; i += 1) {
+    tempMatrix[i] = [];
+    for (let j = 0; j < size; j += 1) {
+      tempMatrix[i][j] = matrix[i][j];
+    }
+  }
+
+  for (let i = 0; i < size; i += 1) {
+    for (let j = 0; j < size; j += 1) {
+      resMatrix[j][size - 1 - i] = tempMatrix[i][j];
+    }
+  }
+  return resMatrix;
 }
 
 /**

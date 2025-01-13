@@ -359,8 +359,52 @@ function getBalanceIndex(arr) {
  *          [10, 9,  8,  7]
  *        ]
  */
-function getSpiralMatrix(/* size */) {
-  throw new Error('Not implemented');
+function getSpiralMatrix(size) {
+  const matrix = [];
+
+  for (let i = 0; i < size; i += 1) {
+    matrix[i] = [];
+    for (let j = 0; j < size; j += 1) {
+      matrix[i][j] = 0;
+    }
+  }
+
+  const spiralBorders = {
+    top: 0,
+    bottom: size - 1,
+    left: 0,
+    right: size - 1,
+  };
+
+  let digit = 1;
+
+  while (
+    spiralBorders.top <= spiralBorders.bottom &&
+    spiralBorders.left <= spiralBorders.right
+  ) {
+    for (let col = spiralBorders.left; col <= spiralBorders.right; col += 1) {
+      matrix[spiralBorders.top][col] = digit;
+      digit += 1;
+    }
+    spiralBorders.top += 1;
+    for (let row = spiralBorders.top; row <= spiralBorders.bottom; row += 1) {
+      matrix[row][spiralBorders.right] = digit;
+      digit += 1;
+    }
+    spiralBorders.right -= 1;
+    for (let col = spiralBorders.right; col >= spiralBorders.left; col -= 1) {
+      matrix[spiralBorders.bottom][col] = digit;
+      digit += 1;
+    }
+    spiralBorders.bottom -= 1;
+    for (let row = spiralBorders.bottom; row >= spiralBorders.top; row -= 1) {
+      matrix[row][spiralBorders.left] = digit;
+      digit += 1;
+    }
+    spiralBorders.left += 1;
+  }
+
+  return matrix;
 }
 
 /**
@@ -552,12 +596,12 @@ function getNearestBigger(number) {
     index += 1;
   }
 
-  let result = 0;
+  let result = '';
   for (let i = 0; i < numberArr.length; i += 1) {
-    result = result * 10 + numberArr[i];
+    result += `${numberArr[i]}`;
   }
 
-  return result;
+  return +result;
 }
 
 module.exports = {
